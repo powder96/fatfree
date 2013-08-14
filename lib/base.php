@@ -1083,7 +1083,8 @@ final class Base {
 				isset($route[$this->hive['VERB']])) {
 				$parts=parse_url($req);
 				if ($this->hive['VERB']=='GET' &&
-					preg_match('/.+\/$/',$parts['path']))
+					preg_match('/.+\/$/',$parts['path']) &&
+				    substr($url, -1) !== '/')
 					$this->reroute(substr($parts['path'],0,-1).
 						(isset($parts['query'])?('?'.$parts['query']):''));
 				list($handler,$ttl,$kbps)=$route[$this->hive['VERB']];
